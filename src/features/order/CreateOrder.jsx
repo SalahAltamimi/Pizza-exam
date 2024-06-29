@@ -25,6 +25,8 @@ function CreateOrder() {
   );
 
   const totalPrice = cart.reduce((a, b) => a + b.totalPrice, 0);
+  const PriorityPrice = withPriority ? totalPrice * 0.2 : 0;
+  const totalPricecart = totalPrice + PriorityPrice;
   const className = "flex flex-col space-y-4";
   const classNamela = "text-base font-semibold";
   if (!cart.length) return <EmptyCart />;
@@ -102,7 +104,9 @@ function CreateOrder() {
             disabled={isLoading}
             className="bg-yellow-400 px-6 py-2 rounded-full font-semibold capitalize mt-4"
           >
-            {isLoading ? "Loading" : `Order now ${formatCurrency(totalPrice)}`}
+            {isLoading
+              ? "Loading"
+              : `Order now ${formatCurrency(totalPricecart)}`}
           </button>
         </div>
       </Form>
